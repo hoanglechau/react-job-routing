@@ -1,16 +1,20 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import {
+  Link, useLocation, useNavigate, useSearchParams,
+} from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
+import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import AuthContext from '../auth/AuthContext';
+// import MoreIcon from '@mui/icons-material/MoreVert';
 
 // Search bar
 const Search = styled('div')(({ theme }) => ({
@@ -51,7 +55,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navigation() {
+  const auth = useContext(AuthContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get('q');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  /*
+  const handleClickLogin = () => {
+    navigate('/');
+  };
+  */
+
+  const handleClickLogout = () => {
+    // eslint-disable-next-line react/destructuring-assignment
+    auth.signOut(() => {
+      navigate('/');
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-shadow
+    const q = formData.get('q');
+    setSearchParams({ q });
+  };
 
   return (
     <Box>
@@ -73,7 +102,7 @@ function Navigation() {
           >
             Job Routing
           </Typography>
-          <Box component="form" sx={{ flexGrow: { xs: 0.7, md: 0 } }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ flexGrow: { xs: 0.7, md: 0 } }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -81,18 +110,42 @@ function Navigation() {
               <StyledInputBase
                 name="q"
                 placeholder="Search..."
+                defaultValue={q ?? undefined}
                 inputProps={{ 'arial-label': 'search' }}
               />
             </Search>
           </Box>
           <Box sx={{ flexGrow: { xs: 0.1, md: 0.7 } }} />
-          <Button
-            variant="text"
-            startIcon={<LoginIcon />}
-            sx={{ color: 'white', textTransform: 'none', display: { xs: 'none', md: 'flex' } }}
-          >
-            Sign in
-          </Button>
+
+          {auth?.user ? (
+            <>
+              <Button
+                onClick={handleClickLogout}
+                variant="text"
+                startIcon={<LogoutIcon />}
+                sx={{ color: 'white', textTransform: 'none' }}
+              >
+                Sign out
+              </Button>
+              <Avatar
+                src="/images/avatar/1.jpg"
+                sx={{ width: 40, height: 40, ml: 1 }}
+              />
+            </>
+          ) : (
+            <Button
+              component={Link}
+              to="/signin"
+              state={{ backgroundLocation: location }}
+              variant="text"
+              startIcon={<LoginIcon />}
+              sx={{ color: 'white', textTransform: 'none' }}
+            >
+              Sign in
+            </Button>
+          )}
+
+          {/* }
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -104,6 +157,7 @@ function Navigation() {
               <MoreIcon />
             </IconButton>
           </Box>
+          { */}
         </Toolbar>
       </AppBar>
     </Box>
