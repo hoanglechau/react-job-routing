@@ -5,6 +5,8 @@ import Layout from './pages/Layout';
 import Home from './pages/Home';
 import LoginModal from './components/LoginModal';
 import JobDetailModal from './components/JobDetailModal';
+import JobDetail from './pages/JobDetail';
+import Login from './pages/Login';
 
 function App() {
   const location = useLocation();
@@ -21,7 +23,8 @@ function App() {
       >
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* <Route path="job/:id" element={<JobDetail />} /> */}
+          <Route path="/job/search/:id" element={<JobDetail />} />
+          <Route path="/login" element={<Login />} />
         </Route>
         <Route
           path="*"
