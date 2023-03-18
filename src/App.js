@@ -1,15 +1,14 @@
 import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import React, { useContext } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import React from 'react';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import LoginModal from './components/LoginModal';
 import JobDetailModal from './components/JobDetailModal';
-import AuthContext from './auth/AuthContext';
 
 function App() {
   const location = useLocation();
-  const auth = useContext(AuthContext);
+  // const auth = useContext(AuthContext);
 
   return (
     <>
@@ -36,16 +35,9 @@ function App() {
       <Routes>
         <Route path="/signin" element={<LoginModal />} />
       </Routes>
-      {/* eslint-disable-next-line react/destructuring-assignment */}
-      {auth.user ? (
-        <Routes>
-          <Route path="/job/:id" element={<JobDetailModal />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/job/:id" element={<LoginModal />} />
-        </Routes>
-      )}
+      <Routes>
+        <Route path="/job/:id" element={<JobDetailModal />} />
+      </Routes>
     </>
   );
 }
