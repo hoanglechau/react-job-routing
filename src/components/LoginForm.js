@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import TextField from '@mui/material/TextField';
+// import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -13,18 +13,18 @@ import Typography from '@mui/material/Typography';
 import AuthContext from '../auth/AuthContext';
 
 const style = {
-  bgcolor: 'background.paper',
+  backgroundColor: (theme) => theme.palette.primary.light,
   display: 'flex',
   flexDirection: 'column',
-  width: '300px',
+  width: '400px',
   border: '1px solid',
-  padding: '10px',
+  padding: '20px',
   borderRadius: '5px',
 };
 
 function LoginForm({ callback }) {
-  const [username] = useState('hoanglechau');
-  const [password] = useState('789');
+  const [username, setUsername] = useState('Hoang');
+  const [password, setPassword] = useState('123456789');
 
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -37,25 +37,31 @@ function LoginForm({ callback }) {
     auth.signIn(username, callback);
   };
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
-    <Box sx={style} component="form" gap={4}>
-      <Typography variant="h4" component="div">
-        Login
+    <Box sx={style} component="form" gap={3}>
+      <Typography variant="h4" component="div" sx={{ textAlign: 'center', color: (theme) => theme.palette.common.white }}>
+        Log in
       </Typography>
-      <TextField
-        disabled
-        label="Username"
-        default="user"
-        value={username}
-        sx={{ m: 1 }}
-      />
+      <FormControl sx={{ m: 1 }} variant="outlined">
+        <InputLabel htmlFor="username">Username</InputLabel>
+        <OutlinedInput id="username" type="text" value={username} sx={{ color: (theme) => theme.palette.common.white }} onChange={handleUsernameChange} label="Username" />
+      </FormControl>
       <FormControl sx={{ m: 1 }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput
-          disabled
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
           value={password}
+          onChange={handlePasswordChange}
+          sx={{ color: (theme) => theme.palette.common.white }}
           endAdornment={(
             <InputAdornment position="end">
               <IconButton
@@ -73,10 +79,12 @@ function LoginForm({ callback }) {
       </FormControl>
       <Button
         onClick={handleLogin}
-        sx={{ m: 1, width: '10ch' }}
+        sx={{
+          m: 1, width: '30%', textAlign: 'center', margin: 'auto', backgroundColor: '#df4747',
+        }}
         variant="contained"
       >
-        Login
+        Sign in
       </Button>
     </Box>
   );
