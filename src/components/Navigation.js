@@ -80,6 +80,7 @@ function Navigation() {
     // eslint-disable-next-line no-shadow
     const q = formData.get('q');
     setSearchParams({ q });
+    navigate(`/job/search/${q}`);
   };
 
   return (
@@ -131,6 +132,18 @@ function Navigation() {
                 src="/images/avatar/1.jpg"
                 sx={{ width: 40, height: 40, ml: 1 }}
               />
+              <Typography
+                component="h7"
+                variant="h7"
+                sx={{
+                  display: { xs: 'none', md: 'block' },
+                  cursor: 'pointer',
+                  marginLeft: '15px',
+                }}
+              >
+                {/* eslint-disable-next-line react/destructuring-assignment */}
+                {auth.user}
+              </Typography>
             </>
           ) : (
             <Button
