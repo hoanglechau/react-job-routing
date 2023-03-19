@@ -10,7 +10,6 @@ import Login from './pages/Login';
 
 function App() {
   const location = useLocation();
-  // const auth = useContext(AuthContext);
 
   return (
     <>
@@ -24,7 +23,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/job/search/:id" element={<JobDetail />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/job/search/login" element={<Login />} />
         </Route>
         <Route
           path="*"
@@ -36,7 +35,7 @@ function App() {
         />
       </Routes>
       <Routes>
-        <Route path="/signin" element={<LoginModal />} />
+        <Route path="/login" element={<LoginModal />} />
       </Routes>
       <Routes>
         <Route path="/job/:id" element={<JobDetailModal />} />
