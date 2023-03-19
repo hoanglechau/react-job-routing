@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 // import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import KeyIcon from '@mui/icons-material/Key';
 import AuthContext from '../auth/AuthContext';
 
 const style = {
@@ -46,13 +47,17 @@ function LoginForm({ callback }) {
   };
 
   return (
-    <Box sx={style} component="form" gap={3}>
-      <Typography variant="h4" component="div" sx={{ textAlign: 'center', color: (theme) => theme.palette.common.white }}>
-        Log in
+    <Box sx={style} component="form">
+      <KeyIcon sx={{
+        alignSelf: 'center', backgroundColor: '#df4747', p: 0.5, borderRadius: '50%',
+      }}
+      />
+      <Typography variant="h5" component="div" sx={{ textAlign: 'center', color: (theme) => theme.palette.common.white }}>
+        Sign in
       </Typography>
       <FormControl sx={{ m: 1 }} variant="outlined">
         <InputLabel htmlFor="username">Username</InputLabel>
-        <OutlinedInput id="username" type="text" value={username} sx={{ color: (theme) => theme.palette.common.white }} onChange={handleUsernameChange} label="Username" />
+        <OutlinedInput id="username" type="text" value={username} sx={{ color: (theme) => theme.palette.common.white, input: { p: 1.5 } }} onChange={handleUsernameChange} label="Username" />
       </FormControl>
       <FormControl sx={{ m: 1 }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -61,7 +66,7 @@ function LoginForm({ callback }) {
           type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={handlePasswordChange}
-          sx={{ color: (theme) => theme.palette.common.white }}
+          sx={{ color: (theme) => theme.palette.common.white, input: { p: 1.5 } }}
           endAdornment={(
             <InputAdornment position="end">
               <IconButton
@@ -80,7 +85,7 @@ function LoginForm({ callback }) {
       <Button
         onClick={handleLogin}
         sx={{
-          m: 1, width: '30%', textAlign: 'center', margin: 'auto', backgroundColor: '#df4747',
+          m: 1, width: '30%', textAlign: 'center', margin: '5px auto 0', backgroundColor: '#df4747',
         }}
         variant="contained"
       >
