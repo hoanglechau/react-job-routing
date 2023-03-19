@@ -23,8 +23,6 @@ const style = {
 function JobDetail() {
   const [job, setJob] = useState();
   const { id } = useParams();
-  // const navigate = useNavigate();
-  // const from = navigate.state?.from?.pathname || '/';
 
   useEffect(() => {
     const fetch = async () => {
