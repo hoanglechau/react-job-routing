@@ -13,7 +13,7 @@ function SkillsPaper({ skills }) {
     <Paper
       sx={{
         display: 'flex',
-        justifyContent: 'start',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         listStyle: 'none',
         p: 0.5,
@@ -29,7 +29,7 @@ function SkillsPaper({ skills }) {
             size="small"
             color="primary"
             label={skill}
-            sx={{ paddingBottom: '2px', backgroundColor: '#df4747' }}
+            sx={{ paddingBottom: '2px', backgroundColor: '#df4747', fontSize: '0.6em' }}
           />
         </ListItem>
       ))}
