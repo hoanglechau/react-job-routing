@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import SkillsPaper from '../components/SkillsPaper';
 import api from '../data/fetchData';
 import RequireAuth from '../auth/RequireAuth';
@@ -32,6 +33,7 @@ function JobDetail() {
     };
     fetch();
   }, [id]);
+
   return (
     <div>
       <RequireAuth callback={() => {}}>
@@ -44,11 +46,11 @@ function JobDetail() {
               color: (theme) => theme.palette.common.white,
             }}
           >
-            <CardContent>
-              <Typography variant="h5" component="div">
+            <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="h5" component="div" sx={{ alignSelf: 'center' }}>
                 {job?.title}
               </Typography>
-              <SkillsPaper skills={job?.skills} />
+              <SkillsPaper skills={job?.skills} sx={{ justifyContent: 'center' }} />
               <Typography>{job?.description}</Typography>
               <Typography variant="h6" component="div">
                 City:
@@ -74,6 +76,16 @@ function JobDetail() {
                 {' '}
                 {job?.remote ? 'Yes' : 'No'}
               </Typography>
+              <Button
+                variant="contained"
+                component={Link}
+                to="/"
+                sx={{
+                  margin: '5px 0 0', alignSelf: 'center', width: '130px', backgroundColor: '#df9e0b', color: 'black', p: '2px',
+                }}
+              >
+                Back to Home
+              </Button>
             </CardContent>
           </Card>
         </Box>
