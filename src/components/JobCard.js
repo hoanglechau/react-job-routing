@@ -26,20 +26,8 @@ function JobCard({
   description, skills, id, title,
 }) {
   const auth = useContext(AuthContext);
-  // const navigate = useNavigate();
 
   const location = useLocation();
-
-  /*
-  const handleClick = () => {
-    // eslint-disable-next-line react/destructuring-assignment
-    if (auth.user) {
-      navigate(`/job/${id}`);
-    } else {
-      navigate('/login');
-    }
-  };
-  */
 
   return (
     <CardStyle ariant="outlined">
@@ -58,9 +46,19 @@ function JobCard({
           >
             {title}
           </Typography>
+          <Typography
+            variant="subtitle2"
+            component="div"
+            sx={{
+              margin: '0 auto 5px', borderRadius: 0.5, width: '50%', bgcolor: '#383030', textAlign: 'center', color: (theme) => theme.palette.common.white,
+            }}
+          >
+            Job ID:
+            {` ${id}`}
+          </Typography>
           <Divider />
           <SkillsPaper skills={skills} />
-          <Typography sx={{ color: (theme) => theme.palette.common.white }}>
+          <Typography sx={{ fontSize: '0.8em', color: (theme) => theme.palette.common.white }}>
             {description}
           </Typography>
         </CardContent>
@@ -69,7 +67,7 @@ function JobCard({
           <Button
             variant="contained"
             component={Link}
-            to={`/job/${id}`}
+            to={`job/${id}`}
             state={{ backgroundLocation: location }}
             sx={{
               width: '130px', backgroundColor: '#df9e0b', color: 'black', p: '2px',
@@ -81,7 +79,7 @@ function JobCard({
           <Button
             variant="contained"
             component={Link}
-            to="signin"
+            to="login"
             state={{ backgroundLocation: location }}
             sx={{
               width: '130px', backgroundColor: '#df9e0b', color: 'black', p: '2px',
