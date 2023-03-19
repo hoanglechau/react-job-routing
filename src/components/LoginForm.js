@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-// import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -11,13 +10,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import KeyIcon from '@mui/icons-material/Key';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../auth/AuthContext';
 
 const style = {
   backgroundColor: (theme) => theme.palette.primary.light,
   display: 'flex',
   flexDirection: 'column',
-  width: '400px',
+  width: { xs: '370px', md: '400px' },
   border: '1px solid',
   padding: '20px',
   borderRadius: '5px',
@@ -26,6 +26,7 @@ const style = {
 function LoginForm({ callback }) {
   const [username, setUsername] = useState('Hoang');
   const [password, setPassword] = useState('123456789');
+  const navigate = useNavigate();
 
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -82,15 +83,26 @@ function LoginForm({ callback }) {
           label="Password"
         />
       </FormControl>
-      <Button
-        onClick={handleLogin}
-        sx={{
-          m: 1, width: '30%', textAlign: 'center', margin: '5px auto 0', backgroundColor: '#df4747',
-        }}
-        variant="contained"
-      >
-        Sign in
-      </Button>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+          onClick={handleLogin}
+          sx={{
+            m: 1, width: '30%', textAlign: 'center', margin: '5px auto 0', backgroundColor: '#df4747',
+          }}
+          variant="contained"
+        >
+          Sign in
+        </Button>
+        <Button
+          onClick={() => navigate('/')}
+          sx={{
+            m: 1, width: '30%', textAlign: 'center', margin: '5px auto 0', backgroundColor: '#df4747',
+          }}
+          variant="contained"
+        >
+          Cancel
+        </Button>
+      </Box>
     </Box>
   );
 }
