@@ -125,7 +125,6 @@ function Navigation() {
                 Sign out
               </Button>
               <Avatar
-                src="/images/avatar/1.jpg"
                 sx={{
                   width: 40, height: 40, ml: 1, display: { xs: 'none', md: 'flex' },
                 }}
