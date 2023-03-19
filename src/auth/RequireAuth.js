@@ -5,6 +5,7 @@ import AuthContext from './AuthContext';
 function RequireAuth({ children }) {
   const auth = useContext(AuthContext);
   const location = useLocation();
+
   // eslint-disable-next-line react/destructuring-assignment
   if (!auth.user) {
     return <Navigate to="/job/search/login" state={{ from: location }} />;
