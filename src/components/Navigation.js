@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import {
   Link, useLocation, useNavigate, useSearchParams,
 } from 'react-router-dom';
@@ -8,13 +8,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
-import { styled, alpha } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import AuthContext from '../auth/AuthContext';
-// import MoreIcon from '@mui/icons-material/MoreVert';
 
 // Search bar
 const Search = styled('div')(({ theme }) => ({
@@ -60,18 +59,17 @@ function Navigation() {
   const q = searchParams.get('q');
   const navigate = useNavigate();
   const location = useLocation();
+  const formRef = useRef();
 
-  /*
-  const handleClickLogin = () => {
+  const handleClickHome = () => {
     navigate('/');
+    formRef.current.reset();
   };
-  */
 
   const handleClickLogout = () => {
     // eslint-disable-next-line react/destructuring-assignment
-    auth.signOut(() => {
-      navigate('/');
-    });
+    auth.signOut(() => navigate('/'));
+    formRef.current.reset();
   };
 
   const handleSubmit = (event) => {
@@ -97,20 +95,18 @@ function Navigation() {
               display: { xs: 'none', md: 'block' },
               cursor: 'pointer',
             }}
-            onClick={() => {
-              navigate('/');
-            }}
+            onClick={handleClickHome}
           >
             Job Routing
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ flexGrow: { xs: 0.7, md: 0 } }}>
+          <Box component="form" ref={formRef} onSubmit={handleSubmit} sx={{ flexGrow: { xs: 0.7, md: 0 } }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
                 name="q"
-                placeholder="Search..."
+                placeholder="Search by Job ID..."
                 defaultValue={q ?? undefined}
                 inputProps={{ 'arial-label': 'search' }}
               />
@@ -130,7 +126,9 @@ function Navigation() {
               </Button>
               <Avatar
                 src="/images/avatar/1.jpg"
-                sx={{ width: 40, height: 40, ml: 1 }}
+                sx={{
+                  width: 40, height: 40, ml: 1, display: { xs: 'none', md: 'flex' },
+                }}
               />
               <Typography
                 component="h7"
@@ -148,7 +146,7 @@ function Navigation() {
           ) : (
             <Button
               component={Link}
-              to="/signin"
+              to="/login"
               state={{ backgroundLocation: location }}
               variant="text"
               startIcon={<LoginIcon />}
@@ -157,20 +155,6 @@ function Navigation() {
               Sign in
             </Button>
           )}
-
-          {/* }
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-haspopup="true"
-              color="inherit"
-              sx={{ p: { xs: '2px', md: '10px' } }}
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-          { */}
         </Toolbar>
       </AppBar>
     </Box>
