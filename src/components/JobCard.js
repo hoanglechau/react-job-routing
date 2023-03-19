@@ -26,7 +26,6 @@ function JobCard({
   description, skills, id, title,
 }) {
   const auth = useContext(AuthContext);
-
   const location = useLocation();
 
   return (
