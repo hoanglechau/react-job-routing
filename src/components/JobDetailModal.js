@@ -22,7 +22,6 @@ const style = {
 function JobDetailModal() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
