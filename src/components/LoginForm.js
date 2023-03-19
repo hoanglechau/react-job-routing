@@ -26,14 +26,16 @@ const style = {
 function LoginForm({ callback }) {
   const [username, setUsername] = useState('Hoang');
   const [password, setPassword] = useState('123456789');
-  const navigate = useNavigate();
-
-  const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   const handleLogin = () => {
     // eslint-disable-next-line react/destructuring-assignment
     auth.signIn(username, callback);
