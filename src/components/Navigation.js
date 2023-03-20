@@ -68,7 +68,8 @@ function Navigation() {
 
   const handleClickLogout = () => {
     // eslint-disable-next-line react/destructuring-assignment
-    auth.signOut(() => navigate('/'));
+    auth.signOut(() => {});
+    navigate('/');
     formRef.current.reset();
   };
 
