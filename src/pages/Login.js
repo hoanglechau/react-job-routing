@@ -5,13 +5,12 @@ import LoginForm from '../components/LoginForm';
 
 function Login() {
   const navigate = useNavigate();
-  const from = navigate.state?.from?.pathname || '/';
 
   return (
     <Stack sx={{ p: 4, alignItems: 'center' }}>
       <LoginForm
         callback={() => {
-          navigate(from, { replace: true });
+          navigate(-1);
         }}
       />
     </Stack>
