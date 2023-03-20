@@ -8,7 +8,7 @@ function RequireAuth({ children }) {
 
   // eslint-disable-next-line react/destructuring-assignment
   if (!auth.user) {
-    return <Navigate to="/job/search/login" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ backgroundLocation: location }} />;
   }
   return children;
 }
