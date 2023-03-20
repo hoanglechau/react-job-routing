@@ -68,18 +68,21 @@ function Navigation() {
 
   const handleClickLogout = () => {
     // eslint-disable-next-line react/destructuring-assignment
-    auth.signOut(() => {});
-    navigate('/');
+    auth.signOut(() => { navigate('/'); });
     formRef.current.reset();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-shadow
-    const q = formData.get('q');
-    setSearchParams({ q });
-    navigate(`/job/search/${q}`);
+    // eslint-disable-next-line react/destructuring-assignment
+    if (auth.user) {
+      const formData = new FormData(event.currentTarget);
+      // eslint-disable-next-line no-shadow
+      const q = formData.get('q');
+      setSearchParams({ q });
+    } else {
+      navigate('/login', { state: { backgroundLocation: location } });
+    }
   };
 
   return (
@@ -107,7 +110,7 @@ function Navigation() {
               </SearchIconWrapper>
               <StyledInputBase
                 name="q"
-                placeholder="Search by Job ID..."
+                placeholder="Search..."
                 defaultValue={q ?? undefined}
                 inputProps={{ 'arial-label': 'search' }}
               />
