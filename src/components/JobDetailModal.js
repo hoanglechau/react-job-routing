@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../data/fetchData';
 import SkillsPaper from './SkillsPaper';
+import RequireAuth from '../auth/RequireAuth';
 
 const style = {
   position: 'absolute',
@@ -38,36 +39,38 @@ function JobDetailModal() {
 
   return (
     <div>
-      <Modal
-        open
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Card
-            sx={{
-              border: 'none',
-              boxShadow: 0,
-              backgroundColor: (theme) => theme.palette.primary.light,
-              color: (theme) => theme.palette.common.white,
-            }}
-          >
-            <CardContent>
-              <Typography variant="h5" component="div">
-                {job?.title}
-              </Typography>
-              <SkillsPaper skills={job?.skills} />
-              <Typography>{job?.description}</Typography>
-              <Typography variant="h6" component="div">
-                City:
-                {' '}
-                {job?.city}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-      </Modal>
+      <RequireAuth callback={() => {}}>
+        <Modal
+          open
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Card
+              sx={{
+                border: 'none',
+                boxShadow: 0,
+                backgroundColor: (theme) => theme.palette.primary.light,
+                color: (theme) => theme.palette.common.white,
+              }}
+            >
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  {job?.title}
+                </Typography>
+                <SkillsPaper skills={job?.skills} />
+                <Typography>{job?.description}</Typography>
+                <Typography variant="h6" component="div">
+                  City:
+                  {' '}
+                  {job?.city}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+        </Modal>
+      </RequireAuth>
     </div>
   );
 }
