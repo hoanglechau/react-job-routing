@@ -2,7 +2,7 @@ const Auth = {
   isAuthenticated: false,
   signIn(callback) {
     Auth.isAuthenticated = true;
-    setTimeout(callback, 100); // fake async.
+    setTimeout(callback, 100);
   },
   signOut(callback) {
     Auth.isAuthenticated = false;
