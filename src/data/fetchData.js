@@ -1,5 +1,6 @@
 import jobs from './jobs.json';
 
+// Function to get jobs that satisfy the search query
 async function getJobs(page, q = null) {
   // eslint-disable-next-line no-unused-vars
   const promise = new Promise((resolve, reject) => {
@@ -22,6 +23,7 @@ async function getJobs(page, q = null) {
   return { jobs: jobs.slice((page - 1) * 6, page * 6 - 1), pagesTotal: 3 };
 }
 
+// Function to get a certain job matching the id
 async function getJob(id) {
   // eslint-disable-next-line no-unused-vars
   const promise = new Promise((resolve, reject) => {
@@ -29,6 +31,7 @@ async function getJob(id) {
       resolve();
     }, 100);
   });
+
   await promise;
 
   return jobs.find((job) => job.id === id);
