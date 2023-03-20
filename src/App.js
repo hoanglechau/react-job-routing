@@ -5,39 +5,30 @@ import Layout from './pages/Layout';
 import Home from './pages/Home';
 import LoginModal from './components/LoginModal';
 import JobDetailModal from './components/JobDetailModal';
-import JobDetail from './pages/JobDetail';
-import Login from './pages/Login';
 
 function App() {
   const location = useLocation();
+  const background = location.state && location.state.backgroundLocation;
+  console.log(location.state);
+  // const auth = useContext(AuthContext);
 
   return (
     <>
-      <Routes
-        location={
-          location.state?.backgroundLocation
-            ? location.state.backgroundLocation
-            : location
-        }
-      >
+      <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/job/search/:id" element={<JobDetail />} />
-          <Route path="/job/search/login" element={<Login />} />
         </Route>
         <Route
           path="*"
           element={(
             <main>
-              <p>There is nothing here!</p>
+              <p>404 Page not found</p>
             </main>
           )}
         />
       </Routes>
       <Routes>
         <Route path="/login" element={<LoginModal />} />
-      </Routes>
-      <Routes>
         <Route path="/job/:id" element={<JobDetailModal />} />
       </Routes>
     </>
