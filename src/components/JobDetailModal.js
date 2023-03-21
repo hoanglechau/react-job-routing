@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import api from '../data/fetchData';
 import SkillsPaper from './SkillsPaper';
 import RequireAuth from '../auth/RequireAuth';
+import Layout from '../pages/Layout';
+import Home from '../pages/Home';
 
 const style = {
   position: 'absolute',
@@ -40,36 +42,40 @@ function JobDetailModal() {
   return (
     <div>
       <RequireAuth callback={() => {}}>
-        <Modal
-          open
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Card
-              sx={{
-                border: 'none',
-                boxShadow: 0,
-                backgroundColor: (theme) => theme.palette.primary.light,
-                color: (theme) => theme.palette.common.white,
-              }}
+        <Layout>
+          <Home>
+            <Modal
+              open
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {job?.title}
-                </Typography>
-                <SkillsPaper skills={job?.skills} />
-                <Typography>{job?.description}</Typography>
-                <Typography variant="h6" component="div">
-                  City:
-                  {' '}
-                  {job?.city}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Box>
-        </Modal>
+              <Box sx={style}>
+                <Card
+                  sx={{
+                    border: 'none',
+                    boxShadow: 0,
+                    backgroundColor: (theme) => theme.palette.primary.light,
+                    color: (theme) => theme.palette.common.white,
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {job?.title}
+                    </Typography>
+                    <SkillsPaper skills={job?.skills} />
+                    <Typography>{job?.description}</Typography>
+                    <Typography variant="h6" component="div">
+                      City:
+                      {' '}
+                      {job?.city}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Box>
+            </Modal>
+          </Home>
+        </Layout>
       </RequireAuth>
     </div>
   );
