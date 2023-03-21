@@ -15,7 +15,7 @@ const CenterPagination = styled(Pagination)(({ theme }) => ({
   },
 }));
 
-function Home() {
+function Home({ children }) {
   const [jobs, setJobs] = useState([]);
   const [pagesTotal, setPagesTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -63,6 +63,7 @@ function Home() {
           No Result
         </Typography>
       )}
+      {children}
     </Container>
   );
 }
