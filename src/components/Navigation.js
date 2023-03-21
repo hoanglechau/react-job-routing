@@ -13,6 +13,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import AuthContext from '../auth/AuthContext';
 
 // Search bar
@@ -28,23 +29,19 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: 'auto',
   },
+  display: 'flex',
+  alignItems: 'center',
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  padding: theme.spacing(0, 1),
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(0)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -80,6 +77,7 @@ function Navigation() {
       // eslint-disable-next-line no-shadow
       const q = formData.get('q');
       setSearchParams({ q });
+      // eslint-disable-next-line react/destructuring-assignment
     } else {
       navigate('/login', { state: { backgroundLocation: location } });
     }
@@ -106,7 +104,14 @@ function Navigation() {
           <Box component="form" ref={formRef} onSubmit={handleSubmit} sx={{ flexGrow: { xs: 0.7, md: 0 } }}>
             <Search>
               <SearchIconWrapper>
-                <SearchIcon />
+                <IconButton
+                  color="primary"
+                  size="small"
+                  onClick={handleSubmit}
+                  sx={{ padding: 0 }}
+                >
+                  <SearchIcon />
+                </IconButton>
               </SearchIconWrapper>
               <StyledInputBase
                 name="q"
