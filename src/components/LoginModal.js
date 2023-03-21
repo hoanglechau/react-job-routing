@@ -21,7 +21,6 @@ function LoginModal() {
   const navigate = useNavigate();
   const location = useLocation();
   const previousLocation = location.state?.backgroundLocation?.pathname || '/';
-  console.log(location.state);
 
   const handleClose = () => {
     navigate('/');
