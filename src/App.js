@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
@@ -7,10 +7,7 @@ import LoginModal from './components/LoginModal';
 import JobDetailModal from './components/JobDetailModal';
 
 function App() {
-  const location = useLocation();
   // const background = location.state && location.state.backgroundLocation;
-  console.log(location.state);
-  // const auth = useContext(AuthContext);
 
   return (
     <Routes>
