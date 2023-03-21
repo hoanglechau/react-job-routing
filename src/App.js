@@ -8,30 +8,26 @@ import JobDetailModal from './components/JobDetailModal';
 
 function App() {
   const location = useLocation();
-  const background = location.state && location.state.backgroundLocation;
+  // const background = location.state && location.state.backgroundLocation;
   console.log(location.state);
   // const auth = useContext(AuthContext);
 
   return (
-    <>
-      <Routes location={background || location}>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-        </Route>
-        <Route
-          path="*"
-          element={(
-            <main>
-              <p>404 Page not found</p>
-            </main>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path="/login" element={<LoginModal />} />
+      <Route path="/job/:id" element={<JobDetailModal />} />
+      <Route
+        path="*"
+        element={(
+          <main>
+            <p>404 Page not found</p>
+          </main>
           )}
-        />
-      </Routes>
-      <Routes>
-        <Route path="/login" element={<LoginModal />} />
-        <Route path="/job/:id" element={<JobDetailModal />} />
-      </Routes>
-    </>
+      />
+    </Routes>
   );
 }
 
