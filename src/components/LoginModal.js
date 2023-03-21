@@ -3,6 +3,8 @@ import Modal from '@mui/material/Modal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import LoginForm from './LoginForm';
+import Home from '../pages/Home';
+import Layout from '../pages/Layout';
 
 const style = {
   position: 'absolute',
@@ -22,22 +24,24 @@ function LoginModal() {
   console.log(location.state);
 
   const handleClose = () => {
-    navigate(-1);
+    navigate('/');
   };
 
   return (
-    <div>
-      <Modal
-        open
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <LoginForm callback={() => { navigate(previousLocation, { replace: true }); }} />
-        </Box>
-      </Modal>
-    </div>
+    <Layout>
+      <Home>
+        <Modal
+          open
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <LoginForm callback={() => { navigate(previousLocation, { replace: true }); }} />
+          </Box>
+        </Modal>
+      </Home>
+    </Layout>
   );
 }
 
