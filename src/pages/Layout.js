@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Navigation from '../components/Navigation';
 
-function Layout() {
+function Layout({ children }) {
   return (
     <Stack
       sx={{
@@ -16,6 +16,8 @@ function Layout() {
       <Navigation />
       <Outlet />
       <Box sx={{ flexGrow: 1 }} />
+      {/* eslint-disable-next-line react/destructuring-assignment */}
+      {children}
     </Stack>
   );
 }
